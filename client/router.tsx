@@ -1,13 +1,17 @@
 /* eslint-disable react/jsx-key */
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-} from 'react-router-dom'
-import App from './components/App'
+import { createRoutesFromElements, Route } from 'react-router-dom'
+import Courses from './components/Courses'
+import Layout from './components/Layout'
+import Students from './components/Students'
+import StudentsById from './components/StudentsById'
+import CoursesById from './components/CoursesById'
 
-const router = createBrowserRouter(
-  createRoutesFromElements([<Route path="/" element={<App />} />])
+export default createRoutesFromElements(
+  <Route path="/" element={<Layout />}>
+    <Route index element={<Courses />} />
+    <Route path="/courses" element={<Courses />} />
+    <Route path="/students" element={<Students />} />
+    <Route path="/students/:id" element={<StudentsById />} />
+    <Route path="/courses/:id" element={<CoursesById />} />
+  </Route>,
 )
-
-export default router
