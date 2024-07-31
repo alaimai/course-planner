@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 export function up(knex) {
-  return knex.schema.createTable('student', (table) => {
+  return knex.schema.createTable('students', (table) => {
     table.increments('id').primary()
     table.string('last_name')
     table.string('first_name')
@@ -16,5 +16,5 @@ export function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-  return knex.schema.dropTable('student')
+  return knex.schema.dropTable('students')
 }
