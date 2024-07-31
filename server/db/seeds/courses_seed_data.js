@@ -1,5 +1,5 @@
 export async function seed(knex) {
-  //await knex('courses').del();
+  await knex('courses').del();
 
   await knex('courses').insert([
     {
