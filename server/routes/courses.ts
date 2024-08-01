@@ -1,6 +1,5 @@
 import { Router } from 'express'
-import * as db from '../db'
-
+import * as db from '../db/index.ts'
 const router = Router()
 
 router.get('/', async (req, res) => {
