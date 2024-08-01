@@ -1,21 +1,19 @@
 import { NavLink } from 'react-router-dom'
-//import { useCourses } from '../hooks/useCourses.ts'
-import { useFruits } from '../hooks/useFruits'
+import useCourses from '../hooks/useCourses.ts'
 
 export default function CourseNav() {
-  //const { data } = useCourses()
-  const { data, isLoading } = useFruits()
+  const { data, isLoading } = useCourses()
 
   if (isLoading) {
     return <div>Loading...</div>
   }
 
-  console.log(data)
-
   return (
     <nav>
       {data.map((course) => (
-        <NavLink to={`/courses/${course}`}>{course}</NavLink>
+        <NavLink key={course.id} to={`/courses/${course.id}`}>
+          {course.name}
+        </NavLink>
       ))}
     </nav>
   )

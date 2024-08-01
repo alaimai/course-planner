@@ -1,9 +1,7 @@
-import { useFruits } from '../hooks/useFruits.ts'
-import { useStudentsById } from '../hooks/useStudents.ts'
+import useStudentsById from '../hooks/useStudents.ts'
 
 export default function StudentsById() {
-  const { data } = useFruits()
-  //const { data } = useStudents() //to be replaced once server route complete
+  const { data } = useStudentsById()
 
   return (
     <>
