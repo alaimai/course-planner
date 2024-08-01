@@ -1,25 +1,36 @@
+import { Link } from 'react-router-dom'
 import useCourses from '../hooks/useCourses.ts'
-import { Course } from '../../models/types.ts'
+import CourseNav from './CourseNav.tsx'
 
 export default function Courses() {
   const { data, error, isLoading } = useCourses()
 
-  if(isLoading) {
+  if (isLoading) {
     return <div>Loading...</div>
   }
-  
-  if(error) {
+
+  if (error) {
     return <div>Error loading courses: {error.message}</div>
   }
 
-  if(!data) {
+  if (!data) {
     return <div>No courses available</div>
   }
   return (
     <>
+      <CourseNav />
       <div className="app">
-        <h1>List of current courses:</h1>
-        <ul>{data.map((course: Course, index: number) => <li key={index}>{course.name}</li>)}</ul>
+        <h2>List of current courses:</h2>
+        <ul>
+          {data &&
+            data.map((course) => (
+              <li key={course.name}>
+                <Link to={`/courses/${course.id}`}>
+                  <strong>{course.name}</strong> - {course.description}
+                </Link>
+              </li>
+            ))}
+        </ul>
       </div>
     </>
   )

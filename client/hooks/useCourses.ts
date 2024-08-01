@@ -5,12 +5,12 @@ export default function useCourses() {
   return useQuery({
     queryKey: ['courses'],
     queryFn: async () => {
-      try{
+      try {
         const res = await request.get(`/api/v1/courses`)
-        return res.body
+        return res.body.courses
       } catch (error) {
-       throw new Error('Failed to fetch courses')
+        throw new Error('Failed to fetch courses')
       }
-    }
+    },
   })
 }
