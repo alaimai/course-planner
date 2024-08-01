@@ -27,3 +27,8 @@ export interface Student_course extends Personal_info{
   teacher_last_name: string
   teacher_first_name: string
 }
+export interface Course_student extends Course{
+  
+  student_last_name: string
+  student_first_name: string
+}
