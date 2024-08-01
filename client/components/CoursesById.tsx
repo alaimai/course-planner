@@ -2,8 +2,8 @@ import { useParams } from 'react-router-dom';
 import useCourseById from '../hooks/useCoursesById'
 
 export default function CourseById() {
-  const { courseId } = useParams<{ courseId: string }>();
-  const { data, error, isLoading } = useCourseById(Number(courseId));
+  const { id } = useParams<{ id: string }>();
+  const { data, error, isLoading } = useCourseById(Number(id));
 
   if (isLoading) {
     return <div>Loading...</div>;
