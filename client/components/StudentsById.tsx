@@ -8,7 +8,7 @@ export default function StudentsById() {
   return (
     <>
       <div className="app">
-        <h1>Details of student:</h1>
+        <h2>Details of student:</h2>
         <ul>
           {data && data.map((student) => <li key={student}>{student}</li>)}
         </ul>
