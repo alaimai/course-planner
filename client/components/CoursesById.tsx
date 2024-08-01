@@ -1,9 +1,11 @@
 import { useParams } from 'react-router-dom'
-import useCoursesById from '../hooks/useCourses.ts'
+import useCoursesById from '../hooks/useCoursesById.ts'
 import CourseNav from './CourseNav.tsx'
 import { Course_student } from '../../models/types.ts'
 export default function CourseById() {
-  const { id } = useParams()
+  //const { id } = useParams()
+  const params = useParams()
+  const id = Number(params.id)
   const { data, error, isLoading } = useCoursesById(id)
 
   if (isLoading) {
@@ -17,7 +19,7 @@ export default function CourseById() {
   if (!data) {
     return <div>No course found</div>
   }
-
+  console.log(data)
   return (
     <>
       <CourseNav />
@@ -27,8 +29,8 @@ export default function CourseById() {
           {data &&
             data.map((course: Partial<Course_student>) => (
               <li key={course.id}>
-                {course.name}
-                {/* {course.student_first_name} */}
+                
+                {course.student_first_name}
               </li>
             ))}
         </ul>

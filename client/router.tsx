@@ -10,8 +10,8 @@ export default createRoutesFromElements(
   <Route path="/" element={<Layout />}>
     <Route index element={<Courses />} />
     <Route path="/courses" element={<Courses />} />
+    <Route path="/courses/:id" element={<CoursesById />} />
     <Route path="/students" element={<Students />} />
     <Route path="/students/:id" element={<StudentsById />} />
-    <Route path="/courses/:id" element={<CoursesById />} />
   </Route>,
 )
