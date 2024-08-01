@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import useCourses from '../hooks/useCourses.ts'
-import CourseNav from './CourseNav.tsx'
 import { Course } from '../../models/types.ts'
 
 export default function Courses() {
@@ -19,12 +18,11 @@ export default function Courses() {
   }
   return (
     <>
-      <CourseNav />
       <div className="app">
         <h2>List of current courses:</h2>
         <ul>
           {data &&
-            data.map((course:Course) => (
+            data.map((course: Course) => (
               <li key={course.name}>
                 <Link to={`/courses/${course.id}`}>
                   <strong>{course.name}</strong> - {course.description}

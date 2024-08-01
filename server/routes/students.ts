@@ -21,4 +21,19 @@ router.get('/:id', async (req, res) => {
     res.status(404).json({ message: 'Can not find the student' })
   }
 })
+
+router.post('/:id/courses', async (req, res) => {
+  const studentId = Number(req.params.id)
+  const { courseId } = req.body
+  console.log('courseID:', courseId)
+
+  try {
+    await db.addCourseToStudent(studentId, courseId)
+    res.status(200).json({ message: 'Course added successfully' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'Something went wrong' })
+  }
+})
+
 export default router

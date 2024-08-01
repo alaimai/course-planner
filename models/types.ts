@@ -1,11 +1,3 @@
-export interface Fruit {
-  id: number
-  name: string
-}
-
-export interface FruitData {
-  name: string
-}
 export interface Course {
   id: number
   name: string
@@ -22,6 +14,7 @@ export interface Personal_info {
 }
 
 export interface Student_course extends Personal_info{
+  course: Course[]
   course_name:string
   location: string
   teacher_last_name: string
