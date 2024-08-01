@@ -7,7 +7,7 @@ export default function useCourses() {
     queryFn: async () => {
       try {
         const res = await request.get(`/api/v1/courses`)
-        return res.body.courses
+        return res.body
       } catch (error) {
         throw new Error('Failed to fetch courses')
       }

@@ -23,6 +23,7 @@ export async function getCourseById(id: number, db = connection) {
       'courses.teacher_id',
       'students.last_name as student_last_name',
       'students.first_name as student_first_name',
+      'students.id as student_id',
     )
   return course as Partial<Course_student> // do we need  student names who have chosen the course?
 }
