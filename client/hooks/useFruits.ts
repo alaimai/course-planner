@@ -29,6 +29,6 @@ export function useCoursesMutation<TData = unknown, TVariables = unknown>(
 }
 
 // Query functions go here e.g. useAddFruit
-/* function useAddFruit() {
+ function useAddFruit() {
   return useFruitsMutation(addFruit)
 } */

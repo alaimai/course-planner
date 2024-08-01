@@ -3,8 +3,8 @@ import useCoursesById from '../hooks/useCourses.ts'
 import CourseNav from './CourseNav.tsx'
 
 export default function CourseById() {
-  const { courseId } = useParams()
-  const { data, error, isLoading } = useCoursesById(courseId)
+  const { id } = useParams()
+  const { data, error, isLoading } = useCoursesById(id)
 
   if (isLoading) {
     return <div>Loading...</div>
