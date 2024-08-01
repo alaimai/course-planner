@@ -1,27 +1,27 @@
-import {
+/*import {
   useQuery,
   useMutation,
   useQueryClient,
   MutationFunction,
 } from '@tanstack/react-query'
-import { getFruits } from '../apis/fruits.ts'
+import { getCourses } from '../apis/courses.ts'
 
-export function useFruits() {
-  const query = useQuery({ queryKey: ['fruits'], queryFn: getFruits })
+export function useCourses() {
+  const query = useQuery({ queryKey: ['courses'], queryFn: getCourses })
   return {
     ...query,
     // Extra queries go here e.g. addFruit: useAddFruit()
   }
 }
 
-export function useFruitsMutation<TData = unknown, TVariables = unknown>(
+export function useCoursesMutation<TData = unknown, TVariables = unknown>(
   mutationFn: MutationFunction<TData, TVariables>
 ) {
   const queryClient = useQueryClient()
   const mutation = useMutation({
     mutationFn,
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['fruits'] })
+      queryClient.invalidateQueries({ queryKey: ['courses'] })
     },
   })
 

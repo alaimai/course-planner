@@ -1,16 +1,27 @@
-import { useFruits } from '../hooks/useFruits.ts'
-import { useCoursesById } from '../hooks/useCourses.ts'
+import { useParams } from 'react-router-dom';
+import useCourseById from '../hooks/useCoursesById'
 
-export default function CoursesById() {
-  const { data } = useFruits()
-  //const { data } = useCourses() //to be replaced once server route complete
+export default function CourseById() {
+  const { courseId } = useParams<{ courseId: string }>();
+  const { data, error, isLoading } = useCourseById(Number(courseId));
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading course: {error.message}</div>;
+  }
+
+  if (!data) {
+    return <div>No course found</div>;
+  }
 
   return (
-    <>
-      <div className="app">
-        <h1>Students in this course:</h1>
-        <ul>{data && data.map((course) => <li key={course}>{course}</li>)}</ul>
-      </div>
-    </>
-  )
+    <div>
+      <h1>{data.name}</h1>
+      <p>{data.description}</p>
+      <p>Teacher ID: {data.teacher_id}</p>
+    </div>
+  );
 }
