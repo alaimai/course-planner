@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import useCoursesById from '../hooks/useCourses.ts'
 import CourseNav from './CourseNav.tsx'
+import { Course } from '../../models/types.ts'
 
 export default function CourseById() {
   const { id } = useParams()

@@ -1,6 +1,10 @@
 import connection from './connection.ts'
 import { Course, Student_course, Personal_info } from '../../models/types.ts'
 
+export async function addCourseToStudent(studentId: number, courseId: number, db = connection) {
+  await db('students_courses').insert({ student_id: studentId, course_id: courseId })
+}
+
 export async function getAllCourses(db = connection): Promise<Course[]> {
   const courses = await db('courses').select('*')
   return courses as Course[]
