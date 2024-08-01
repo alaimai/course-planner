@@ -1,13 +1,30 @@
 import connection from './connection.ts'
-import { Course, Student_course, Personal_info } from '../../models/types.ts'
+import {
+  Course,
+  Student_course,
+  Personal_info,
+  Course_student,
+} from '../../models/types.ts'
 
 export async function getAllCourses(db = connection): Promise<Course[]> {
   const courses = await db('courses').select('*')
   return courses as Course[]
 }
 export async function getCourseById(id: number, db = connection) {
-  const course = await db('courses').where({ id }).first()
-  return course as Course// do we need  student names who have chosen the course?
+  const course = await db('courses')
+    .join('enrolments', 'courses.id', 'enrolments.course_id')
+    .join('students', 'enrolments.student_id', 'students.id')
+    .where('courses.id', id)
+    .select(
+      'courses.id',
+      'courses.name',
+      'courses.location',
+      'courses.description',
+      'courses.teacher_id',
+      'students.last_name as student_last_name',
+      'students.first_name as student_first_name',
+    )
+  return course as Partial<Course_student> // do we need  student names who have chosen the course?
 }
 export async function getAllStudents(db = connection) {
   const students = await db('students').select('*')
@@ -23,7 +40,7 @@ export async function getStudentById(id: number, db = connection) {
       'students.last_name',
       'students.first_name',
       'students.email',
-      'courses.name',
+      'courses.name as course_name',
     )
   return student as Partial<Student_course>
 }

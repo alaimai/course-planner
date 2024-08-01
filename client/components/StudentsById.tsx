@@ -9,7 +9,7 @@ export default function StudentsById() {
       <div className="app">
         <h2>Details of student:</h2>
         <ul>
-          {data && data.map((student:Student_course) => <li key={student.id}>{student.last_name}</li>)}
+          {data && data.map((student:Student_course) => <li key={student.id}>{student.course_name}</li>)}
         </ul>
       </div>
     </>
