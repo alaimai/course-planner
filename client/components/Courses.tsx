@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import useCourses from '../hooks/useCourses.ts'
-import CourseNav from './CourseNav.tsx'
 
 export default function Courses() {
   const { data, error, isLoading } = useCourses()
@@ -18,7 +17,6 @@ export default function Courses() {
   }
   return (
     <>
-      <CourseNav />
       <div className="app">
         <h2>List of current courses:</h2>
         <ul>

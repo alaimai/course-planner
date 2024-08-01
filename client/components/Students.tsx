@@ -10,7 +10,9 @@ export default function Students() {
         <ul>
           {data &&
             data.map((student: Personal_info) => (
-              <li key={student.id}>{student.last_name}</li>
+              <li key={student.id}>
+                {student.first_name} {student.last_name}
+              </li>
             ))}
         </ul>
       </div>
