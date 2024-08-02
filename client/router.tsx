@@ -17,6 +17,6 @@ export default createRoutesFromElements(
     <Route path="/students/:id" element={<StudentsById />} />
     <Route path="/teachers/:id" element={<TeacherById />} />
     <Route path="/teachers" element={<Teachers />} />
-
+    <Route path="/teachers/:id" element={<TeacherById />} />
   </Route>,
 )
