@@ -77,7 +77,7 @@ export default function StudentsById() {
           <h3>Enrolled Courses:</h3>
           <ul>
             {student.length > 0 ? (
-              student.map((course: Course) => (
+              student.map((course: Partial<Student_course>) => (
                 <li key={course.id}>{course.course_name}</li>
               ))
             ) : (
