@@ -4,6 +4,7 @@ import request from 'superagent'
 import { Course, Student_course } from '../../models/types.ts'
 import useStudentByID from '../hooks/useStudentsById.ts'
 import { useState, useEffect } from 'react'
+import { handleDeleteCourse } from '../commands.js'
 
 const rootUrl = '/api/v1'
 
@@ -34,10 +35,28 @@ export default function StudentsById() {
     },
   })
 
+  const deleteCourse = useMutation({
+    mutationFn: (courseId: number) =>
+      request.delete(`${rootUrl}/students/${studentId}/${courseId}`),
+    onError: (error) => {
+      console.error('Error deleting course:', error)
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['students', studentId] })
+      console.log('Course deleted successfully')
+    },
+  })
+
+  function handleDeleteCourse(e, student_id: number, course_id: number) {
+    e.preventDefault()
+    deleteCourse.mutate(course_id)
+  }
+
   const handleAddCourse = () => {
     if (selectedCourseId) {
       mutation.mutate(selectedCourseId)
     }
+    setSelectedCourseId(null)
   }
   useEffect(() => {
     const getUnrolledCourses = () => {
@@ -84,14 +103,24 @@ export default function StudentsById() {
         <h2>Details of student:</h2>
         <div>
           <h3>
-            Name: {student[0].first_name || ''} {student[0].last_name || ''}
+            Name:{' '}
+            {student.length > 0
+              ? `${student[0].first_name} ${student[0].last_name}`
+              : ''}
           </h3>
           <h3>Enrolled Courses:</h3>
           <ul>
             {student.length > 0 ? (
               student.map((course: Partial<Student_course>) => (
-                <li key={course.id}>
+                <li key={course.course_id}>
                   <Link to={`/courses/${course.id}`}>{course.course_name}</Link>
+                  <button
+                    onClick={(e) =>
+                      handleDeleteCourse(e, course.id, course.course_id)
+                    }
+                  >
+                    Delete
+                  </button>
                 </li>
               ))
             ) : (

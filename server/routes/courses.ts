@@ -3,7 +3,7 @@ import * as db from '../db/index.ts'
 const router = Router()
 
 router.get('/:id', async (req, res) => {
-  console.log('Accessing /:id route with id:', req.params.id)
+  // console.log('Accessing /:id route with id:', req.params.id)
   const id = Number(req.params.id)
   try {
     const course = await db.getCourseById(id)
