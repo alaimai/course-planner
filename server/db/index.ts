@@ -61,6 +61,7 @@ export async function getStudentById(id: number, db = connection) {
       'students.first_name',
       'students.email',
       'courses.name as course_name',
+      'courses.id as course_id',
     )
   return student as Partial<Student_course>
 }

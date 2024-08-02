@@ -19,7 +19,7 @@ export default function TeacherById() {
   if (!data) {
     return <div>No course found</div>
   }
-  console.log(data)
+
   return (
     <>
       <div className="app">
@@ -34,7 +34,6 @@ export default function TeacherById() {
                 <Link to={`/courses/${teacher.course_id}`}>
                   {teacher.course_name}
                 </Link>{' '}
-                
               </li>
             ))}
           </ul>

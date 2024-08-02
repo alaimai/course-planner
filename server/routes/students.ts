@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
 router.post('/:id/courses', async (req, res) => {
   const studentId = Number(req.params.id)
   const { courseId } = req.body
-  console.log('courseID:', courseId)
+  // console.log('courseID:', courseId)
 
   try {
     await db.addCourseToStudent(studentId, courseId)
