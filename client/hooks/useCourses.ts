@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import request from 'superagent'
 
-export default function useCourses() {
+export default function useCourses(id: number) {
   return useQuery({
     queryKey: ['courses'],
     queryFn: async () => {

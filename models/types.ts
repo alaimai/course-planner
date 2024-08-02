@@ -14,7 +14,7 @@ export interface Personal_info {
 }
 
 export interface Student_course extends Personal_info{
-  course: Course[]
+  
   course_name:string
   location: string
   teacher_last_name: string
@@ -24,4 +24,11 @@ export interface Course_student extends Course{
   
   student_last_name: string
   student_first_name: string
+  student_id: number
+}
+export interface Teacher_course extends Personal_info{
+  
+  course_name:string
+  course_id: number
+  
 }
