@@ -1,6 +1,6 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import useTeacherById from '../hooks/useTeacherById.ts'
-import { Course_student } from '../../models/types.ts'
+import { Course_student, Teacher_course } from '../../models/types.ts'
 
 export default function TeacherById() {
   //const { id } = useParams()
@@ -26,9 +26,17 @@ export default function TeacherById() {
         <h2>Details of teacher:</h2>
         <div>
           <h3>
-            Name: {data.first_name || ''} {data.last_name || ''}
+            Name: {data[0].first_name || ''} {data[0].last_name || ''}
           </h3>
-          
+          <ul>
+            {data.map((teacher: Partial<Teacher_course>) => (
+              <li key={teacher.course_id}>
+                <Link to={`/courses/${teacher.course_id}`}>
+                  {teacher.course_name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </>

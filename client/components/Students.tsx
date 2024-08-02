@@ -43,7 +43,7 @@ export default function StudentsList() {
 
   return (
     <div className="app">
-      <h1>List of Students</h1>
+      <h2>List of Students</h2>
       <ul>
         {students.map((student: Personal_info) => (
           <li key={student.id}>

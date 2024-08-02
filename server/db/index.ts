@@ -62,13 +62,15 @@ export async function getTeacherById(id: number, db = connection) {
   const teacher = await db('teachers')
     .join('courses', 'teachers.id', 'courses.teacher_id')
     .where('teachers.id', id)
+
     .select(
-      'teachers.id',
+      'courses.teacher_id',
       'teachers.last_name',
-      'teachers.last_name',
-      'teachers.eamil',
+      'teachers.first_name',
+      'teachers.email',
       'courses.name as course_name',
       'courses.id as course_id',
+      
     )
-  return teacher as Partial<Teacher_course>
+  return teacher as Partial<Teacher_course>[]
 }

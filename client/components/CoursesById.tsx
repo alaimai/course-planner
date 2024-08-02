@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import useCoursesById from '../hooks/useCoursesById.ts'
 import { Course_student } from '../../models/types.ts'
 
@@ -23,12 +23,14 @@ export default function CourseById() {
   return (
     <>
       <div className="app">
-        <h2>Students in this course:</h2>
+        <h2>Students in this course: {data[0].name}</h2>
         <ul>
           {data &&
             data.map((course: Partial<Course_student>) => (
               <li key={course.student_id}>
-                {course.student_first_name} {course.student_last_name}
+                <Link to={`/students/${course.student_id}`}>
+                  {course.student_first_name} {course.student_last_name}
+                </Link>
               </li>
             ))}
         </ul>
