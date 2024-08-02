@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom'
-import useCoursesById from '../hooks/useCourses.ts'
+import { Link, useParams } from 'react-router-dom'
+import useCoursesById from '../hooks/useCoursesById.ts'
 import { Course_student } from '../../models/types.ts'
 
 export default function CourseById() {
@@ -27,9 +27,12 @@ export default function CourseById() {
         <ul>
           {data &&
             data.map((course: Partial<Course_student>) => (
-              <li key={course.student_first_name}>
-                {course.student_first_name} {course.student_last_name}
-              </li>
+              <Link key="1" to={`/students/1`}>
+                {/*TODO UNCOMMENT THIS WHEN student_id AVAILABLE <Link key="1" to={`/students/${course.student_id}`}> */}
+                <li key={course.student_first_name}>
+                  {course.student_first_name} {course.student_last_name}
+                </li>
+              </Link>
             ))}
         </ul>
       </div>
