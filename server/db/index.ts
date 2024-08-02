@@ -53,3 +53,11 @@ export async function getStudentById(id: number, db = connection) {
     )
   return student as Partial<Student_course>
 }
+export async function getAllTeachers(db = connection) {
+  const teachers = await db('teachers').select('*')
+  return teachers as Personal_info[]
+}
+export async function getTeacherById(id: number, db = connection) {
+  const teacher = await db('teachers').where('students.id', id).first()
+  return teacher as Personal_info
+}

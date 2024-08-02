@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Personal_info } from '../../models/types.ts'
 import useTeachers from '../hooks/useTeachers.ts'
 
@@ -11,7 +12,7 @@ export default function Teachers() {
         <ul>
           {data &&
             data.map((teacher: Personal_info) => (
-              <li key={teacher.id}>{teacher.last_name}</li>
+              <li key={teacher.id}><Link to={`/teachers/${teacher.id}`}>{teacher.first_name} {teacher.last_name}</Link></li>
             ))}
         </ul>
       </div>
