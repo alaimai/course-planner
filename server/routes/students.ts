@@ -36,4 +36,18 @@ router.post('/:id/courses', async (req, res) => {
   }
 })
 
+router.delete('/:id/:courseId', async (req, res) => {
+  const { id, courseId } = req.params
+  const numericId = Number(id)
+  const numericCourseId = Number(courseId)
+  //console.log('courseID:', courseId)
+  try {
+    await db.removeCourseFromStudent(numericId, numericCourseId)
+    res.status(200).json({ message: 'course removed successfully' })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: 'something went wrong with the delete' })
+  }
+})
+
 export default router

@@ -15,6 +15,16 @@ export async function addCourseToStudent(
   await db('enrolments').insert({ student_id: studentId, course_id: courseId })
 }
 
+export async function removeCourseFromStudent(
+  studentId: number,
+  courseId: number,
+  db = connection,
+) {
+  await db('enrolments')
+    .where({ student_id: studentId, course_id: courseId })
+    .del()
+}
+
 export async function getAllCourses(db = connection): Promise<Course[]> {
   const courses = await db('courses').select('*')
   return courses as Course[]
@@ -70,7 +80,6 @@ export async function getTeacherById(id: number, db = connection) {
       'teachers.email',
       'courses.name as course_name',
       'courses.id as course_id',
-      
     )
   return teacher as Partial<Teacher_course>[]
 }
