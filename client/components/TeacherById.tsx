@@ -33,7 +33,8 @@ export default function TeacherById() {
               <li key={teacher.course_id}>
                 <Link to={`/courses/${teacher.course_id}`}>
                   {teacher.course_name}
-                </Link>
+                </Link>{' '}
+                
               </li>
             ))}
           </ul>

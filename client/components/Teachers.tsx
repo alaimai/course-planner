@@ -12,7 +12,13 @@ export default function Teachers() {
         <ul>
           {data &&
             data.map((teacher: Personal_info) => (
-              <li key={teacher.id}><Link to={`/teachers/${teacher.id}`}>{teacher.first_name} {teacher.last_name}</Link></li>
+              <li key={teacher.id}>
+                <Link to={`/teachers/${teacher.id}`}>
+                  {teacher.first_name} {teacher.last_name}
+                </Link>
+                
+                <div>Email: {teacher.email}</div>
+              </li>
             ))}
         </ul>
       </div>
