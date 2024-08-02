@@ -10,6 +10,7 @@ const rootUrl = '/api/v1'
 export default function StudentsById() {
   const { id } = useParams<{ id: string }>()
   const studentId = Number(id)
+  const [unenrolledCourse, setUnenrolledCourse] = useState<Course[]>([])
 
   const { data: student, isLoading, error } = useStudentByID(studentId)
   const { data: coursesData } = useQuery({
@@ -38,24 +39,35 @@ export default function StudentsById() {
       mutation.mutate(selectedCourseId)
     }
   }
-  // useEffect(() => {
-  //   // console.log('Student Data:', student)
-  //   // console.log('Courses Data:', coursesData)
-  // }, [student, coursesData])
+  useEffect(() => {
+    const getUnrolledCourses = () => {
+      const courses: Course[] = Array.isArray(coursesData) ? coursesData : []
+
+      const studentCourses = student || []
+      const unenrolledCourses: Course[] = courses.filter(
+        (course: Course) =>
+          !studentCourses.some(
+            (sc: Partial<Student_course>) => sc.course_name === course.name,
+          ),
+      )
+      setUnenrolledCourse(unenrolledCourses)
+    }
+    getUnrolledCourses()
+  }, [student, coursesData])
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error loading student: {error.message}</div>
   if (!student) return <div>No student found</div>
 
-  const courses: Course[] = Array.isArray(coursesData) ? coursesData : []
+  // const courses: Course[] = Array.isArray(coursesData) ? coursesData : []
 
-  const studentCourses = student || []
-  const unenrolledCourses: Course[] = courses.filter(
-    (course: Course) =>
-      !studentCourses.some(
-        (sc: Partial<Student_course>) => sc.course_name === course.name,
-      ),
-  )
+  // const studentCourses = student || []
+  // const unenrolledCourses: Course[] = courses.filter(
+  //   (course: Course) =>
+  //     !studentCourses.some(
+  //       (sc: Partial<Student_course>) => sc.course_name === course.name,
+  //     ),
+  // )
 
   // console.log('student', student)
   // console.log('studentCourses', studentCourses)
@@ -95,8 +107,8 @@ export default function StudentsById() {
             <option value="" disabled>
               Select a course
             </option>
-            {unenrolledCourses.length > 0 ? (
-              unenrolledCourses.map((course: Course) => (
+            {unenrolledCourse.length > 0 ? (
+              unenrolledCourse.map((course: Course) => (
                 <option key={course.id} value={course.id}>
                   {course.name}
                 </option>
