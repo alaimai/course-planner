@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import request from 'superagent'
 import { Course, Student_course } from '../../models/types.ts'
@@ -90,7 +90,9 @@ export default function StudentsById() {
           <ul>
             {student.length > 0 ? (
               student.map((course: Partial<Student_course>) => (
-                <li key={course.id}>{course.course_name}</li>
+                <li key={course.id}>
+                  <Link to={`/courses/${course.id}`}>{course.course_name}</Link>
+                </li>
               ))
             ) : (
               <li>No courses enrolled</li>
